@@ -1,0 +1,49 @@
+name: Release
+
+# Push a tag like v0.1.0 to publish a release:
+#   git tag v0.1.0 && git push origin v0.1.0
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to release (must already exist)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-15
+    env:
+      TAG: ${{ github.event.inputs.tag || github.ref_name }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TAG }}
+
+      - name: Test
+        run: swift test
+
+      - name: Build universal app
+        run: |
+          VERSION="${TAG#v}"
+          /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" Support/Info.plist
+          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${{ github.run_number }}" Support/Info.plist
+          scripts/build_app.sh
+
+      - name: Package
+        run: |
+          ditto -c -k --keepParent build/SnapMark.app "SnapMark-${TAG}.zip"
+          shasum -a 256 "SnapMark-${TAG}.zip" > "SnapMark-${TAG}.zip.sha256"
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$TAG" "SnapMark-${TAG}.zip" "SnapMark-${TAG}.zip.sha256" \
+            --title "SnapMark ${TAG}" --generate-notes \
+            --notes "Universal (Apple Silicon + Intel), macOS 14+. Unzip and move SnapMark.app to Applications. This build is not notarized: on first launch right-click the app and choose Open, or run \`xattr -dr com.apple.quarantine /Applications/SnapMark.app\`. Then allow Screen Recording when prompted." \
+          || gh release upload "$TAG" "SnapMark-${TAG}.zip" "SnapMark-${TAG}.zip.sha256" --clobber
