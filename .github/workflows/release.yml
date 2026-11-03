@@ -45,5 +45,5 @@ jobs:
         run: |
           gh release create "$TAG" "SnapMark-${TAG}.zip" "SnapMark-${TAG}.zip.sha256" \
             --title "SnapMark ${TAG}" --generate-notes \
-            --notes "Universal (Apple Silicon + Intel), macOS 14+. Unzip and move SnapMark.app to Applications. This build is not notarized: on first launch right-click the app and choose Open, or run \`xattr -dr com.apple.quarantine /Applications/SnapMark.app\`. Then allow Screen Recording when prompted." \
+            --notes "Universal (Apple Silicon + Intel), macOS 14+. Unzip and drag SnapMark.app to Applications. This build is not notarized, so approve it once: System Settings → Privacy & Security → scroll to Security → Open Anyway (https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unknown-developer-mh40616/mac). Terminal alternative: \`xattr -dr com.apple.quarantine /Applications/SnapMark.app\`. Then allow Screen Recording when prompted. See the README for troubleshooting." \
           || gh release upload "$TAG" "SnapMark-${TAG}.zip" "SnapMark-${TAG}.zip.sha256" --clobber
