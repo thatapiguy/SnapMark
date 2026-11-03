@@ -30,8 +30,12 @@
 
 1. Download `SnapMark-vX.Y.Z.zip` from the [latest release](../../releases/latest) and unzip it.
 2. Drag **SnapMark** into your **Applications** folder.
-3. Open it. macOS will say it can't verify the app, because SnapMark isn't notarized yet. **Right-click the app, choose Open, then click Open.** You only need to do this once.
-   If you'd rather use Terminal: `xattr -dr com.apple.quarantine /Applications/SnapMark.app`
+3. Open it. macOS will say it can't verify the app, because SnapMark isn't notarized yet. You only need to approve it once:
+   - Open **System Settings → Privacy & Security**, scroll down to the **Security** section, and click **Open Anyway** next to the message about SnapMark. Confirm with your password or Touch ID, then click **Open**.
+   - On macOS 14 you can instead right-click the app, choose **Open**, then click **Open**. On newer versions macOS no longer offers that shortcut, so use the steps above.
+   - Prefer Terminal? `xattr -dr com.apple.quarantine /Applications/SnapMark.app`
+
+   Apple's guide: [Open a Mac app from an unknown developer](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unknown-developer-mh40616/mac).
 4. Follow the welcome window and allow **Screen Recording**. macOS requires this for any app that takes screenshots. If macOS asks you to restart the app, use the **Restart SnapMark** button.
 
 ## Taking a screenshot
@@ -93,7 +97,7 @@ tccutil reset ScreenCapture com.snapmark.app
 Then open SnapMark again and re-allow Screen Recording. Make sure there is only one copy of the app on your Mac.
 
 **macOS warns about the app every time I update.**
-Releases aren't signed with a paid Apple Developer ID yet. Right-click → Open each time, or use the `xattr` command above.
+Releases aren't signed with a paid Apple Developer ID yet, so each new version needs the same one-time approval: **System Settings → Privacy & Security → Open Anyway** (see [Install](#install)), or the `xattr` command.
 
 ## Privacy
 
