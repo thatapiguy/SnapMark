@@ -24,6 +24,7 @@ mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 lipo -create "$BIN_ARM" "$BIN_X86" -output "$APP/Contents/MacOS/SnapMark"
 strip -x "$APP/Contents/MacOS/SnapMark" 2>/dev/null || true
 cp Support/Info.plist "$APP/Contents/Info.plist"
+cp Support/AppIcon.icns "$APP/Contents/Resources/AppIcon.icns"
 
 codesign --force --options runtime --sign "$IDENTITY" \
     --entitlements Support/SnapMark.entitlements "$APP"
