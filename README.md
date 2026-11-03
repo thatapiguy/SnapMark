@@ -43,7 +43,12 @@ SnapMark sits in your menu bar (the viewfinder icon). Press a shortcut, then dra
 | **⌘⇧2** | Capture a region and **copy it** to the clipboard |
 | **⌘⇧3** | Capture a region and **open it in the editor** |
 
-You can change these, or add your own, in **Settings → Shortcuts**. Each shortcut pairs a capture with an action: copy, open the editor, save to a folder, or copy and save.
+You can change these, or add your own, in **Settings → Shortcuts** (open it from the menu bar icon). Each shortcut pairs a capture with an action: copy, open the editor, save to a folder, or copy and save.
+
+<p align="center">
+  <img src="docs/images/settings-shortcuts.png" width="480" alt="The Shortcuts settings table with two example shortcuts">
+</p>
+<p align="center"><sub>Click a shortcut to record a new key combination. The two shown here are custom examples.</sub></p>
 
 > **Using ⌘⇧3 / ⌘⇧4 / ⌘⇧5?** macOS owns those keys for its own screenshots. To use them in SnapMark, turn the built-in ones off in *System Settings → Keyboard → Keyboard Shortcuts → Screenshots*. SnapMark warns you in Settings when a shortcut clashes.
 
@@ -67,7 +72,11 @@ Every mark you add is an object. Click it to move, resize, recolor or delete it,
 
 Images are exported at full native resolution, so Retina screenshots stay sharp. Pixelated areas are permanently flattened into the exported image, so the hidden content can't be recovered from the copy or file.
 
-By default, saved screenshots go to `~/Pictures/SnapMark`. Pick another folder and a file-name template in **Settings → General**.
+By default, saved screenshots go to `~/Pictures/SnapMark`. Pick another folder and a file-name template in **Settings → General**, which also shows whether Screen Recording is allowed.
+
+<p align="center">
+  <img src="docs/images/settings-general.png" width="480" alt="The General settings tab showing the save folder, file name template and permission status">
+</p>
 
 ## Troubleshooting
 
